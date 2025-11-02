@@ -2,10 +2,9 @@
   "name": "sigma-gpt-backend",
   "version": "1.0.0",
   "type": "module",
-  "main": "Backend/server.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node Backend/server.js",
-    "dev": "nodemon Backend/server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
