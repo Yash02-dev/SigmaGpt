@@ -8,3 +8,12 @@
     "openai": "^6.5.0"
   }
 }
+
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
