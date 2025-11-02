@@ -3,6 +3,8 @@ import Chat from "./Chat.jsx"
 import { MyContext } from "./MyContext.jsx";
 import { useContext, useState,useEffect } from "react";
 import {ScaleLoader} from "react-spinners";
+import server from "./environment.js";
+
 
 function ChatWindow() {
     const {prompt,setPrompt,reply,setReply,currThreadId,prevChats,setPrevChats,setNewChat} = useContext(MyContext);
@@ -25,7 +27,7 @@ function ChatWindow() {
             })
         };
         try {
-            const response = await fetch("http://localhost:8080/api/chat",options);
+            const response = await fetch(`${server}/api/chat`,options);
             const res = await response.json();
             console.log(res);
             setReply(res.reply);
