@@ -1,4 +1,12 @@
 {
+  "name": "sigma-gpt-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "Backend/server.js",
+  "scripts": {
+    "start": "node Backend/server.js",
+    "dev": "nodemon Backend/server.js"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
@@ -6,14 +14,5 @@
     "mongoose": "^8.19.2",
     "nodemon": "^3.1.10",
     "openai": "^6.5.0"
-  }
-}
-
-{
-  "name": "backend",
-  "version": "1.0.0",
-  "type": "module",
-  "scripts": {
-    "start": "node server.js"
   }
 }
