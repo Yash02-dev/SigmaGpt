@@ -22,9 +22,9 @@ function Sidebar() {
 
     }
 
-    // useEffect(() => {
-    //     getAllThreads();
-    // },[currThreadId]);
+    useEffect(() => {
+        getAllThreads();
+    },[currThreadId]);
 
     const createNewChat = () => {
         flushSync(() => {
