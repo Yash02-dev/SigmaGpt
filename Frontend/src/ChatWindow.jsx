@@ -7,7 +7,7 @@ import server from "./environment.js";
 
 
 function ChatWindow() {
-    const {prompt,setPrompt,reply,setReply,currThreadId,prevChats,setPrevChats,setNewChat} = useContext(MyContext);
+    const {prompt,setPrompt,reply,setReply,currThreadId,setPrevChats,setNewChat} = useContext(MyContext);
     const [loading,setLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
 
