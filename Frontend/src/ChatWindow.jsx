@@ -74,7 +74,7 @@ function ChatWindow() {
                     <div className="dropDownItem"><i className="fa-solid fa-arrow-right-from-bracket"></i> Log Out</div>
                 </div>
             }
-            <Chat></Chat>
+            <Chat loading={loading}></Chat>
 
             <ScaleLoader color="#fff" loading={loading}></ScaleLoader>
 

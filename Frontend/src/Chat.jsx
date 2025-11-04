@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
 
-function Chat() {
+function Chat({loading}) {
     const {newChat,prevChats,reply} = useContext(MyContext);
     const [latestReply, setLatestReply] = useState(null);
 
@@ -48,7 +48,7 @@ function Chat() {
                 }
 
                 {
-                    prevChats.length > 0 && (
+                    prevChats.length > 0 && !loading &&(
                         <>
                             {
                                 latestReply === null ? (
