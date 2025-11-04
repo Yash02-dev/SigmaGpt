@@ -4,6 +4,7 @@ import { MyContext } from "./MyContext.jsx";
 import {v1 as uuidv1} from "uuid";
 import server from "./environment.js";
 import logo from "./assets/blacklogo.png";
+import { flushSync } from "react-dom";
 
 
 function Sidebar() {
@@ -26,18 +27,16 @@ function Sidebar() {
     },[currThreadId]);
 
     const createNewChat = () => {
-        setNewChat(false);
-        setNewChat(true);
+        flushSync(() => {
+        
         setPrevChats([]);
         setReply(null);
         setPrompt("");
-        setCurrThreadId(uuidv1());
+        setNewChat(true);
+        });
 
-        setTimeout(() => {
-        const newId = uuidv1();
-        setCurrThreadId(newId);
-        setNewChat(true); // render "What are you working on?"
-        }, 0);
+
+        setCurrThreadId(uuidv1());
     
     }
 
