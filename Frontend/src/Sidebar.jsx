@@ -26,11 +26,18 @@ function Sidebar() {
     },[currThreadId]);
 
     const createNewChat = () => {
+        setNewChat(false);
         setNewChat(true);
         setPrevChats([]);
         setReply(null);
         setPrompt("");
         setCurrThreadId(uuidv1());
+
+        setTimeout(() => {
+        const newId = uuidv1();
+        setCurrThreadId(newId);
+        setNewChat(true); // render "What are you working on?"
+        }, 0);
     
     }
 

@@ -8,10 +8,7 @@ import "highlight.js/styles/github-dark.css";
 function Chat() {
     const {newChat,prevChats,reply} = useContext(MyContext);
     const [latestReply, setLatestReply] = useState(null);
-
-    useEffect(() => {
-    setLatestReply(null);
-    }, [newChat, prevChats.length]);
+    
 
     useEffect(() => {
         if(reply===null) {
