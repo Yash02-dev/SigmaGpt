@@ -10,8 +10,8 @@ function Chat() {
     const [latestReply, setLatestReply] = useState(null);
 
     useEffect(() => {
-    setLatestReply(null);
-    }, []);
+  console.log("Chat mounted with new currThreadId");
+}, []);
 
     useEffect(() => {
         if(reply===null) {
