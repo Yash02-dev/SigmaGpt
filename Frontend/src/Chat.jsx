@@ -6,8 +6,8 @@ import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
 
 function Chat() {
-    const {newChat,prevChats,reply} = useContext(MyContext);
-    const [latestReply, setLatestReply] = useState(null);
+    const {newChat,prevChats,reply,latestReply, setLatestReply} = useContext(MyContext);
+    
 
     useEffect(() => {
         if(reply===null) {

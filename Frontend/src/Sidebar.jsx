@@ -8,7 +8,7 @@ import { flushSync } from "react-dom";
 
 
 function Sidebar() {
-    const {allThreads, setAllThreads , currThreadId, setNewChat, setPrompt, setReply, setCurrThreadId, setPrevChats} = useContext(MyContext);
+    const {allThreads, setAllThreads , currThreadId, setNewChat, setPrompt, setReply, setCurrThreadId, setPrevChats,setLatestReply} = useContext(MyContext);
 
     const getAllThreads = async () => {
         try {
@@ -30,6 +30,7 @@ function Sidebar() {
         flushSync(() => {
         
         setPrevChats([]);
+        setLatestReply(null);
         setReply(null);
         setPrompt("");
         setNewChat(true);
