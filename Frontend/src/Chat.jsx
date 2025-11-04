@@ -9,6 +9,10 @@ function Chat() {
     const {newChat,prevChats,reply} = useContext(MyContext);
     const [latestReply, setLatestReply] = useState(null);
 
+    if (!newChat && prevChats.length === 0 && !reply) {
+        return null; // render nothing until context settles
+    }
+
     useEffect(() => {
   console.log("Chat mounted with new currThreadId");
 }, []);
