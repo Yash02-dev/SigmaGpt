@@ -10,6 +10,10 @@ function Chat() {
     const [latestReply, setLatestReply] = useState(null);
 
     useEffect(() => {
+    setLatestReply(null);
+    }, [newChat, prevChats.length]);
+
+    useEffect(() => {
         if(reply===null) {
             setLatestReply(null);
             return;
