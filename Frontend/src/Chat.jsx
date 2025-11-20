@@ -29,7 +29,7 @@ function Chat() {
 
         return () => clearInterval(interval);
 
-    }, [newChat, reply])
+    }, [prevChats, reply])
 
     return(
         <>
