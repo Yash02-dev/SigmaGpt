@@ -4,13 +4,14 @@ import { MyContext } from "./MyContext";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
+import {v4 as uuid} from "uuid";
 
 function Chat() {
     const {newChat,prevChats,reply,latestReply, setLatestReply} = useContext(MyContext);
     
 
     useEffect(() => {
-        if(reply===null) {
+        if(newChat || reply === null || !reply) {
             setLatestReply(null);
             return;
         }
@@ -28,7 +29,7 @@ function Chat() {
 
         return () => clearInterval(interval);
 
-    }, [prevChats, reply])
+    }, [newChat, reply])
 
     return(
         <>
@@ -36,19 +37,20 @@ function Chat() {
 
             <div className="chats">
                 {
-                    prevChats?.slice(0,-1).map((chat,idx) =>
-                        <div className={chat.role === "user"? "userDiv": "gptDiv"} key={idx}>
+
+                    (!newChat && prevChats?.slice(0,-1).map((chat) =>
+                        <div className={chat.role === "user"? "userDiv": "gptDiv"} key={uuid()}>
                             {
                                 chat.role === "user"?
                                 <p className="userMessage">{chat.content}</p>:
                                 <ReactMarkdown rehypePlugins={[rehypeHighlight]}>{chat.content}</ReactMarkdown>
                             }
                         </div>
-                    )
+                    ))
                 }
 
                 {
-                    prevChats.length > 0 &&(
+                    (!newChat && prevChats.length > 0 &&(
                         <>
                             {
                                 latestReply === null ? (
@@ -62,7 +64,7 @@ function Chat() {
                                 )
                             }
                         </>
-                    )
+                    ))
                 }
             </div>
         </>

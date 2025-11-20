@@ -4,11 +4,12 @@ import { MyContext } from "./MyContext.jsx";
 import {v1 as uuidv1} from "uuid";
 import server from "./environment.js";
 import logo from "./assets/blacklogo.png";
-import { flushSync } from "react-dom";
+
 
 
 function Sidebar() {
-    const {allThreads, setAllThreads , currThreadId, setNewChat, setPrompt, setReply, setCurrThreadId, setPrevChats,setLatestReply} = useContext(MyContext);
+
+    const {allThreads, setAllThreads , currThreadId, setNewChat, setPrompt, prevChats,reply,setReply, setCurrThreadId, setPrevChats,setLatestReply,newChat} = useContext(MyContext);
 
     const getAllThreads = async () => {
         try {
@@ -27,21 +28,20 @@ function Sidebar() {
     },[currThreadId]);
 
     const createNewChat = () => {
-        flushSync(() => {
-        
-        setPrevChats([]);
-        setLatestReply(null);
+        const newThreadId = uuidv1();
+        setPrevChats(() => []);
         setReply(null);
+        setLatestReply(null);
         setPrompt("");
+        setCurrThreadId(newThreadId);
         setNewChat(true);
-        });
-
-
-        setCurrThreadId(uuidv1());
-    
     }
 
     const changeThread = async (newThreadId) => {
+        setReply(null);
+        setLatestReply(null);
+        setPrevChats([]);
+        setNewChat(false);
         setCurrThreadId(newThreadId);
 
         try {
@@ -80,8 +80,8 @@ function Sidebar() {
 
             <ul className="history">
                 {
-                    allThreads?.map((thread, idx) => (
-                        <li key={idx} onClick={(e) => changeThread(thread.threadId)} className={thread.threadId===currThreadId ? "highlighted" : ""}>
+                    allThreads?.map((thread) => (
+                        <li key={thread.threadId} onClick={(e) => changeThread(thread.threadId)} className={thread.threadId===currThreadId ? "highlighted" : ""}>
                             {thread.title}
                             <i className="fa-solid fa-trash"
                                 onClick={(e) => {

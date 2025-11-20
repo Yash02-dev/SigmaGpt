@@ -10,6 +10,10 @@ const PORT = 8080;
 app.use(express.json());
 app.use(cors());
 
+app.get("/", (req, res)=>{
+  res.send("Hi i am root");
+});
+
 app.use("/api",chatRoutes);
 
 app.listen(PORT,() => {
