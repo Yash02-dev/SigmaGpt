@@ -25,10 +25,10 @@ router.post("/test", async(req,res) => {
 router.get("/thread", async(req,res) => {
     try {
         const threads = await Thread.find({}).sort({updatedAt:-1});
-        res.json(threads);
+         return res.json(threads);
     }catch(err) {
         console.log(err);
-        res.status(500).json({error:"Failed to fetch Threads"});
+        return res.status(500).json({error:"Failed to fetch Threads"});
     }
 });
 
@@ -39,14 +39,14 @@ router.get("/thread/:threadId", async(req,res) => {
         const thread = await Thread.findOne({threadId});
 
         if(!thread) {
-            res.status(404).json({error:"Thread Not Found!"});
+            return res.status(404).json({error:"Thread Not Found!"});
         }
 
-        res.json(thread.messages);
+        return res.json(thread.messages);
 
     }catch (err) {
         console.log(err);
-        res.status(500).json({error:"Failed to fetch chat"});
+        return res.status(500).json({error:"Failed to fetch chat"});
     }
 });
 
@@ -57,14 +57,14 @@ router.delete("/thread/:threadId", async(req,res) => {
         const deletedThread = await Thread.findOneAndDelete({threadId});
 
         if(!deletedThread) {
-            res.status(404).json({error:"Thread not found!"});
+            return res.status(404).json({error:"Thread not found!"});
         }
 
-        res.status(200).json({success:"Thread Deleted Succesfully"});
+        return res.status(200).json({success:"Thread Deleted Succesfully"});
 
     }catch(err) {
         console.log(err);
-        res.status(500).json({error:"Failed to delete thread"});
+        return res.status(500).json({error:"Failed to delete thread"});
     }
 });
 
@@ -72,7 +72,7 @@ router.post("/chat", async(req,res) => {
     const {threadId,message} = req.body;
 
     if(!threadId || !message) {
-        res.status(400).json({error:"missing required fields"});
+        return res.status(400).json({error:"missing required fields"});
     }
 
     try{
@@ -94,11 +94,11 @@ router.post("/chat", async(req,res) => {
         thread.updatedAt = new Date();
 
         await thread.save();
-        res.json({reply:assistantReply});
+        return res.json({reply:assistantReply});
 
     }catch(err) {
         console.log(err);
-        res.status(500).json({error:"something went wrong"});
+        return res.status(500).json({error:"something went wrong"});
     }
 });
 
