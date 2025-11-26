@@ -7,7 +7,7 @@ import "highlight.js/styles/github-dark.css";
 import {v4 as uuid} from "uuid";
 
 function Chat() {
-    const {newChat,prevChats,reply,latestReply, setLatestReply} = useContext(MyContext);
+    const {newChat,prevChats,reply,latestReply, setLatestReply,setReply} = useContext(MyContext);
     
 
     useEffect(() => {
@@ -24,7 +24,9 @@ function Chat() {
             setLatestReply(content.slice(0, idx+1).join(" "));
 
             idx++;
-            if(idx >= content.length) clearInterval(interval);
+            if(idx >= content.length) {
+                clearInterval(interval);
+                setReply(null);}
         }, 40);
 
         return () => clearInterval(interval);
@@ -53,7 +55,7 @@ function Chat() {
                     (!newChat && prevChats.length > 0 &&(
                         <>
                             {
-                                latestReply === null ? (
+                                !reply && latestReply === null ? (
                                     <div className="gptDiv" key={"non-typing"}>
                                         <ReactMarkdown rehypePlugins={[rehypeHighlight]}>{prevChats[prevChats.length-1].content}</ReactMarkdown>
                                     </div>
